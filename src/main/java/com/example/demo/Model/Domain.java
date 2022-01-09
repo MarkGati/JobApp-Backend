@@ -1,8 +1,11 @@
 package com.example.demo.Model;
 
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "domain")
@@ -20,6 +23,29 @@ public class Domain{
     )
     public Long id;
     public String description;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "domains")
+    Set<Internship> internships;
+
+    public Domain(Long id, String description, Set<Internship> internships) {
+        this.id = id;
+        this.description = description;
+        this.internships = internships;
+    }
+
+    public Set<Internship> getInternships() {
+        return this.internships;
+    }
+
+    public void setInternships(Set<Internship> internships) {
+        this.internships = internships;
+    }
+
+    public Domain internships(Set<Internship> internships) {
+        setInternships(internships);
+        return this;
+    }
 
     public Domain() {
     }

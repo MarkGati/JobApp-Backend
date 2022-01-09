@@ -46,4 +46,14 @@ public class UserService {
         return null;
     }
 
+    public Optional<User> authentification(String username, String password){
+        Optional<User> user = userRepository.findUserByUser_name(username);
+        if (user != null){
+            if (user.get().user_name == username && user.get().password == password){
+                return user;
+            }
+        }
+        return null;
+    }
+
 }

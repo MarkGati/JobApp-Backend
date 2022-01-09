@@ -1,25 +1,54 @@
 package com.example.demo.Model;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "internship")
 public class Internship{
+    
+    @Id
+    @SequenceGenerator(
+        name = "internship_sequence",
+        sequenceName = "internship_sequence",
+        allocationSize=1
+    )
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "internship_sequence"
+    )
+    public Long id;
+    public String name;
+    public Date start_date;
+    public Date end_date;
+    public Long targeted_faculties_id;
+    public Long competences_acquired_id;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+        name = "internships_domains",
+        joinColumns = @JoinColumn(name = "internship_id"),
+        inverseJoinColumns = @JoinColumn(name = "domain_id")
+    )
+    public Set<Domain> domains;
 
     public Internship() {
     }
 
-    public Internship(Long id, String name, Date start_date, Date end_date, Long targeted_faculties_id, Long competences_acquired_id) {
+    public Internship(Long id, String name, Date start_date, Date end_date, Long targeted_faculties_id, Long competences_acquired_id, Set<Domain> domains) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
         this.targeted_faculties_id = targeted_faculties_id;
         this.competences_acquired_id = competences_acquired_id;
+        this.domains = domains;
     }
 
     public Long getId() {
@@ -70,6 +99,14 @@ public class Internship{
         this.competences_acquired_id = competences_acquired_id;
     }
 
+    public Set<Domain> getDomains() {
+        return this.domains;
+    }
+
+    public void setDomains(Set<Domain> domains) {
+        this.domains = domains;
+    }
+
     public Internship id(Long id) {
         setId(id);
         return this;
@@ -100,6 +137,11 @@ public class Internship{
         return this;
     }
 
+    public Internship domains(Set<Domain> domains) {
+        setDomains(domains);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -108,12 +150,12 @@ public class Internship{
             return false;
         }
         Internship internship = (Internship) o;
-        return Objects.equals(id, internship.id) && Objects.equals(name, internship.name) && Objects.equals(start_date, internship.start_date) && Objects.equals(end_date, internship.end_date) && Objects.equals(targeted_faculties_id, internship.targeted_faculties_id) && Objects.equals(competences_acquired_id, internship.competences_acquired_id);
+        return Objects.equals(id, internship.id) && Objects.equals(name, internship.name) && Objects.equals(start_date, internship.start_date) && Objects.equals(end_date, internship.end_date) && Objects.equals(targeted_faculties_id, internship.targeted_faculties_id) && Objects.equals(competences_acquired_id, internship.competences_acquired_id) && Objects.equals(domains, internship.domains);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, start_date, end_date, targeted_faculties_id, competences_acquired_id);
+        return Objects.hash(id, name, start_date, end_date, targeted_faculties_id, competences_acquired_id, domains);
     }
 
     @Override
@@ -125,24 +167,8 @@ public class Internship{
             ", end_date='" + getEnd_date() + "'" +
             ", targeted_faculties_id='" + getTargeted_faculties_id() + "'" +
             ", competences_acquired_id='" + getCompetences_acquired_id() + "'" +
+            ", domains='" + getDomains() + "'" +
             "}";
     }
-
-    @Id
-    @SequenceGenerator(
-        name = "internship_sequence",
-        sequenceName = "internship_sequence",
-        allocationSize=1
-    )
-    @GeneratedValue(
-        strategy = GenerationType.SEQUENCE,
-        generator = "internship_sequence"
-    )
-    public Long id;
-    public String name;
-    public Date start_date;
-    public Date end_date;
-    public Long targeted_faculties_id;
-    public Long competences_acquired_id;
     
 }
