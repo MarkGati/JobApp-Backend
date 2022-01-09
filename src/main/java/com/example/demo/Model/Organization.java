@@ -1,13 +1,15 @@
 package com.example.demo.Model;
 
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "organization")
 public class Organization{
-
     @Id
     @SequenceGenerator(
         name = "organization_sequence",
@@ -19,14 +21,22 @@ public class Organization{
         generator = "organization_sequence"
     )
     public Long id;
-    public Long domain_id;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+        name = "internships_domains",
+        joinColumns = @JoinColumn(name = "internship_id"),
+        inverseJoinColumns = @JoinColumn(name = "domain_id")
+    )
+    public Set<Domain> domains;
 
     public Organization() {
     }
 
-    public Organization(Long id, Long domain_id) {
+    public Organization(Long id, Set<Domain> domains) {
         this.id = id;
-        this.domain_id = domain_id;
+        this.domains = domains;
     }
 
     public Long getId() {
@@ -37,12 +47,12 @@ public class Organization{
         this.id = id;
     }
 
-    public Long getDomain_id() {
-        return this.domain_id;
+    public Set<Domain> getDomains() {
+        return this.domains;
     }
 
-    public void setDomain_id(Long domain_id) {
-        this.domain_id = domain_id;
+    public void setDomains(Set<Domain> domains) {
+        this.domains = domains;
     }
 
     public Organization id(Long id) {
@@ -50,8 +60,8 @@ public class Organization{
         return this;
     }
 
-    public Organization domain_id(Long domain_id) {
-        setDomain_id(domain_id);
+    public Organization domains(Set<Domain> domains) {
+        setDomains(domains);
         return this;
     }
 
@@ -63,19 +73,19 @@ public class Organization{
             return false;
         }
         Organization organization = (Organization) o;
-        return Objects.equals(id, organization.id) && Objects.equals(domain_id, organization.domain_id);
+        return Objects.equals(id, organization.id) && Objects.equals(domains, organization.domains);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, domain_id);
+        return Objects.hash(id, domains);
     }
 
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
-            ", domain_id='" + getDomain_id() + "'" +
+            ", domains='" + getDomains() + "'" +
             "}";
     }
     

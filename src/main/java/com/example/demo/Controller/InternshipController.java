@@ -34,6 +34,11 @@ public class InternshipController {
         return internshipService.getInternshipsByDomain(id);
     }
 
+    @GetMapping(path = "byOrg/{id}")
+    public List<Internship> getIntershipByOrganization(@PathVariable("id") long id){
+        return internshipService.getInternshipsByOrg(id);
+    }
+
     @PostMapping
     public void registerNewInternship(@RequestBody Internship internship){
         internshipService.addNewInternship(internship);

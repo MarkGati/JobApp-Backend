@@ -38,6 +38,10 @@ public class InternshipService {
         return result;
     }
 
+    public List<Internship> getInternshipsByOrg(long organization_id) {
+        return null;
+    }
+
     public void addNewInternship(Internship internship) {
         internshipRepository.save(internship);
     }
@@ -47,5 +51,6 @@ public class InternshipService {
             internshipRepository.deleteById(id);
         } else throw new IllegalStateException("Internship with id " +id  + " does not exist");
     }
+
 
 }
