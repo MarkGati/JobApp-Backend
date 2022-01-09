@@ -24,6 +24,11 @@ public class FacultyController {
 		return facultyService.getFacultys();
 	}
 
+    @GetMapping(path = "{id}")
+    public Optional<Faculty> getFaculty(@PathVariable("id") long id){
+        return facultyService.getFaculty(id);
+    }
+
     @PostMapping
     public void registerNewFaculty(@RequestBody Faculty faculty){
         facultyService.addNewFaculty(faculty);

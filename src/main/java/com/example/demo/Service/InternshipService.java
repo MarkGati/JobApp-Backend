@@ -2,6 +2,8 @@ package com.example.demo.Service;
 
 
 import java.util.List;
+import java.util.Optional;
+
 import com.example.demo.Model.Internship;
 import com.example.demo.Repository.InternshipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,8 @@ public class InternshipService {
 		return internshipRepository.findAll();
 	}
 
-    public Internship getInternship(Long id){
-        return internshipRepository.getById(id);
+    public Optional<Internship> getInternship(Long id){
+        return internshipRepository.findById(id);
     }
 
     public void addNewInternship(Internship internship) {

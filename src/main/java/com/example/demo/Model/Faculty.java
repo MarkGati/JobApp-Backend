@@ -2,7 +2,26 @@ package com.example.demo.Model;
 
 import java.util.Objects;
 
-public class Faculty {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "faculty")
+public class Faculty{
+
+    @Id
+    @SequenceGenerator(
+        name = "faculty_sequence",
+        sequenceName = "faculty_sequence",
+        allocationSize=1
+    )
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "faculty_sequence"
+    )
+    public Long id;
+    public String name;
+    public Long university_id;
+    public Long domain_id;
 
     public Faculty() {
     }
@@ -91,10 +110,5 @@ public class Faculty {
             ", domain_id='" + getDomain_id() + "'" +
             "}";
     }
-    public Long id;
-    public String name;
-    public Long university_id;
-    public Long domain_id;
-
     
 }

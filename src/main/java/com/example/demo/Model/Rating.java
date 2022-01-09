@@ -1,8 +1,22 @@
 package com.example.demo.Model;
 
 import java.util.Objects;
+import javax.persistence.*;
 
-public class Rating {
+@Entity
+@Table(name = "rating")
+public class Rating{
+
+    @Id
+    @SequenceGenerator(
+        name = "rating_sequence",
+        sequenceName = "rating_sequence",
+        allocationSize=1
+    )
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "rating_sequence"
+    )
     public Long id;
     public String description;
 

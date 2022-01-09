@@ -23,8 +23,8 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-    public User getUser(Long id){
-        return userRepository.getById(id);
+    public Optional<User> getUser(Long id){
+        return userRepository.findById(id);
     }
 
     public void addNewUser(User user) {
@@ -40,6 +40,10 @@ public class UserService {
         if (userRepository.existsById(id)){
             userRepository.deleteById(id);
         } else throw new IllegalStateException("User with id " +id  + " does not exist");
+    }
+
+    public Object findById(long id) {
+        return null;
     }
 
 }

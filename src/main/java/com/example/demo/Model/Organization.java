@@ -2,7 +2,22 @@ package com.example.demo.Model;
 
 import java.util.Objects;
 
-public class Organization {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "organization")
+public class Organization{
+
+    @Id
+    @SequenceGenerator(
+        name = "organization_sequence",
+        sequenceName = "organization_sequence",
+        allocationSize=1
+    )
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "organization_sequence"
+    )
     public Long id;
     public Long domain_id;
 

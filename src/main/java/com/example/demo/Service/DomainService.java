@@ -2,6 +2,8 @@ package com.example.demo.Service;
 
 
 import java.util.List;
+import java.util.Optional;
+
 import com.example.demo.Model.Domain;
 import com.example.demo.Repository.DomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,8 @@ public class DomainService {
 		return domainRepository.findAll();
 	}
 
-    public Domain getDomain(Long id){
-        return domainRepository.getById(id);
+    public Optional<Domain> getDomain(Long id){
+        return domainRepository.findById(id);
     }
 
     public void addNewDomain(Domain domain) {

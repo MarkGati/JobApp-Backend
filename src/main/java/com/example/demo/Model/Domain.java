@@ -2,7 +2,24 @@ package com.example.demo.Model;
 
 import java.util.Objects;
 
-public class Domain {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "domain")
+public class Domain{
+
+    @Id
+    @SequenceGenerator(
+        name = "domain_sequence",
+        sequenceName = "domain_sequence",
+        allocationSize=1
+    )
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "domain_sequence"
+    )
+    public Long id;
+    public String description;
 
     public Domain() {
     }
@@ -61,7 +78,5 @@ public class Domain {
             ", description='" + getDescription() + "'" +
             "}";
     }
-    public Long id;
-    public String description;
     
 }

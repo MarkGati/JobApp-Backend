@@ -2,7 +2,24 @@ package com.example.demo.Model;
 
 import java.util.Objects;
 
-public class Competence {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "competence")
+public class Competence{
+
+    @Id
+    @SequenceGenerator(
+        name = "competence_sequence",
+        sequenceName = "competence_sequence",
+        allocationSize=1
+    )
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "competence_sequence"
+    )
+    public Long id;
+    public String description;
 
     public Competence() {
     }
@@ -61,7 +78,5 @@ public class Competence {
             ", description='" + getDescription() + "'" +
             "}";
     }
-    public Long id;
-    public String description;
     
 }

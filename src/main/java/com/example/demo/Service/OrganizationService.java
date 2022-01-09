@@ -2,6 +2,8 @@ package com.example.demo.Service;
 
 
 import java.util.List;
+import java.util.Optional;
+
 import com.example.demo.Model.Organization;
 import com.example.demo.Repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,8 @@ public class OrganizationService {
 		return organizationRepository.findAll();
 	}
 
-    public Organization getOrganization(Long id){
-        return organizationRepository.getById(id);
+    public Optional<Organization> getOrganization(Long id){
+        return organizationRepository.findById(id);
     }
 
     public void addNewOrganization(Organization organization) {

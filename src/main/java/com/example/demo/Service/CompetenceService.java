@@ -2,6 +2,8 @@ package com.example.demo.Service;
 
 
 import java.util.List;
+import java.util.Optional;
+
 import com.example.demo.Model.Competence;
 import com.example.demo.Repository.CompetenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,8 @@ public class CompetenceService {
 		return competenceRepository.findAll();
 	}
 
-    public Competence getCompetence(Long id){
-        return competenceRepository.getById(id);
+    public Optional<Competence> getCompetence(Long id){
+        return competenceRepository.findById(id);
     }
 
     public void addNewCompetence(Competence competence) {

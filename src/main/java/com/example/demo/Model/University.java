@@ -2,7 +2,22 @@ package com.example.demo.Model;
 
 import java.util.Objects;
 
-public class University {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "university")
+public class University{
+
+    @Id
+    @SequenceGenerator(
+        name = "university_sequence",
+        sequenceName = "university_sequence",
+        allocationSize=1
+    )
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "university_sequence"
+    )
     public Long id;
     public String name;
 

@@ -2,6 +2,8 @@ package com.example.demo.Service;
 
 
 import java.util.List;
+import java.util.Optional;
+
 import com.example.demo.Model.Faculty;
 import com.example.demo.Repository.FacultyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,8 @@ public class FacultyService {
 		return facultyRepository.findAll();
 	}
 
-    public Faculty getFaculty(Long id){
-        return facultyRepository.getById(id);
+    public Optional<Faculty> getFaculty(Long id){
+        return facultyRepository.findById(id);
     }
 
     public void addNewFaculty(Faculty faculty) {

@@ -2,6 +2,8 @@ package com.example.demo.Service;
 
 
 import java.util.List;
+import java.util.Optional;
+
 import com.example.demo.Model.Rating;
 import com.example.demo.Repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,8 @@ public class RatingService {
 		return ratingRepository.findAll();
 	}
 
-    public Rating getRating(Long id){
-        return ratingRepository.getById(id);
+    public Optional<Rating> getRating(Long id){
+        return ratingRepository.findById(id);
     }
 
     public void addNewRating(Rating rating) {

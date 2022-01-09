@@ -24,6 +24,11 @@ public class DomainController {
 		return domainService.getDomains();
 	}
 
+    @GetMapping(path = "{id}")
+    public Optional<Domain> getDomain(@PathVariable("id") long id){
+        return domainService.getDomain(id);
+    }
+
     @PostMapping
     public void registerNewDomain(@RequestBody Domain domain){
         domainService.addNewDomain(domain);

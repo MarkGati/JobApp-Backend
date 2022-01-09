@@ -23,6 +23,11 @@ public class InternshipController {
 	public List<Internship> getInternships(){
 		return internshipService.getInternships();
 	}
+    
+    @GetMapping(path = "{id}")
+    public Optional<Internship> getInternship(@PathVariable("id") long id){
+        return internshipService.getInternship(id);
+    }
 
     @PostMapping
     public void registerNewInternship(@RequestBody Internship internship){

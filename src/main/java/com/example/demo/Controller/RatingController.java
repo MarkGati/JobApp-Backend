@@ -24,6 +24,11 @@ public class RatingController {
 		return ratingService.getRatings();
 	}
 
+    @GetMapping(path = "{id}")
+    public Optional<Rating> getRating(@PathVariable("id") long id){
+        return ratingService.getRating(id);
+    }
+
     @PostMapping
     public void registerNewRating(@RequestBody Rating rating){
         ratingService.addNewRating(rating);

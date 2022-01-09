@@ -2,6 +2,8 @@ package com.example.demo.Service;
 
 
 import java.util.List;
+import java.util.Optional;
+
 import com.example.demo.Model.University;
 import com.example.demo.Repository.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,8 @@ public class UniversityService {
 		return universityRepository.findAll();
 	}
 
-    public University getUniversity(Long id){
-        return universityRepository.getById(id);
+    public Optional<University> getUniversity(Long id){
+        return universityRepository.findById(id);
     }
 
     public void addNewUniversity(University university) {

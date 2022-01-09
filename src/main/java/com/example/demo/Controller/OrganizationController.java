@@ -24,6 +24,11 @@ public class OrganizationController {
 		return organizationService.getOrganizations();
 	}
 
+    @GetMapping(path = "{id}")
+    public Optional<Organization> getOrganization(@PathVariable("id") long id){
+        return organizationService.getOrganization(id);
+    }
+
     @PostMapping
     public void registerNewOrganization(@RequestBody Organization organization){
         organizationService.addNewOrganization(organization);
