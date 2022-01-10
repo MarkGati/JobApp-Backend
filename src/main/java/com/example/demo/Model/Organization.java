@@ -21,6 +21,7 @@ public class Organization{
         generator = "organization_sequence"
     )
     public Long id;
+    public String name;
 
     @JsonIgnore
     @ManyToMany
@@ -31,12 +32,49 @@ public class Organization{
     )
     public Set<Domain> domains;
 
-    public Organization() {
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+        name = "organizations_users",
+        joinColumns = @JoinColumn(name = "organization_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    public Set<User> users;
+
+    public Organization(Long id, String name, Set<Domain> domains, Set<User> users) {
+        this.id = id;
+        this.name = name;
+        this.domains = domains;
+        this.users = users;
     }
 
-    public Organization(Long id, Set<Domain> domains) {
-        this.id = id;
-        this.domains = domains;
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<User> getUsers() {
+        return this.users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public Organization name(String name) {
+        setName(name);
+        return this;
+    }
+
+    public Organization users(Set<User> users) {
+        setUsers(users);
+        return this;
+    }
+
+    public Organization() {
     }
 
     public Long getId() {

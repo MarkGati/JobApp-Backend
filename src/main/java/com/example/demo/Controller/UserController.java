@@ -39,5 +39,10 @@ public class UserController {
         userService.deleteUser(id);
     }
 
+    @GetMapping(path = "auth/{username}.{password}")
+    public Optional<User> authUser(@PathVariable("username") String username, @PathVariable("password") String password){
+        return userService.authentification(username, password);
+    }
+
     
 }

@@ -1,52 +1,35 @@
 package com.example.demo.Model;
 
 import java.util.Objects;
-import java.util.Set;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "domain")
-public class Domain{
+@Table(name = "personality")
+public class Personality{
 
     @Id
     @SequenceGenerator(
-        name = "domain_sequence",
-        sequenceName = "domain_sequence",
+        name = "personality_sequence",
+        sequenceName = "personality_sequence",
         allocationSize=1
     )
     @GeneratedValue(
         strategy = GenerationType.SEQUENCE,
-        generator = "domain_sequence"
+        generator = "personality_sequence"
     )
     public Long id;
     public String description;
 
-    @ManyToMany(mappedBy = "domains")
-    Set<Internship> internships;
-
-    public Domain(Long id, String description, Set<Internship> internships) {
-        this.id = id;
-        this.description = description;
-        this.internships = internships;
+    public Personality() {
     }
 
-    public Set<Internship> getInternships() {
-        return this.internships;
-    }
-
-    public void setInternships(Set<Internship> internships) {
-        this.internships = internships;
-    }
-
-    public Domain internships(Set<Internship> internships) {
-        setInternships(internships);
-        return this;
-    }
-
-    public Domain() {
-    }
-
-    public Domain(Long id, String description) {
+    public Personality(Long id, String description) {
         this.id = id;
         this.description = description;
     }
@@ -67,12 +50,12 @@ public class Domain{
         this.description = description;
     }
 
-    public Domain id(Long id) {
+    public Personality id(Long id) {
         setId(id);
         return this;
     }
 
-    public Domain description(String description) {
+    public Personality description(String description) {
         setDescription(description);
         return this;
     }
@@ -81,11 +64,11 @@ public class Domain{
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof Domain)) {
+        if (!(o instanceof Personality)) {
             return false;
         }
-        Domain domain = (Domain) o;
-        return Objects.equals(id, domain.id) && Objects.equals(description, domain.description);
+        Personality personality = (Personality) o;
+        return Objects.equals(id, personality.id) && Objects.equals(description, personality.description);
     }
 
     @Override
@@ -100,5 +83,7 @@ public class Domain{
             ", description='" + getDescription() + "'" +
             "}";
     }
+
+
     
 }
